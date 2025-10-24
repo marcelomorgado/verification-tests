@@ -11,9 +11,7 @@ const baseNodeUrl = process.env.BASE_NODE_URL || ''
 const hemiNodeUrl = process.env.HEMI_NODE_URL || ''
 const plasmaNodeUrl = process.env.PLASMA_NODE_URL || ''
 
-const accounts: [string] | undefined = process.env.DEPLOYER_PRIVATE_KEY
-  ? [process.env.DEPLOYER_PRIVATE_KEY!]
-  : undefined
+const accounts: {mnemonic: string} | undefined = process.env.MNEMONIC ? {mnemonic: process.env.MNEMONIC!} : undefined
 
 const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
@@ -30,7 +28,6 @@ const config: HardhatUserConfig = {
       verify: {
         etherscan: {
           apiUrl: 'https://explorer.optimism.io/api',
-          apiKey: 'noApiKeyNeeded',
         },
       },
     },
@@ -38,6 +35,11 @@ const config: HardhatUserConfig = {
       url: baseNodeUrl,
       accounts,
       chainId: 8453,
+      verify: {
+        etherscan: {
+          apiUrl: 'https://base.blockscout.com/api',
+        },
+      },
     },
     hemi: {
       url: hemiNodeUrl,
@@ -46,7 +48,6 @@ const config: HardhatUserConfig = {
       verify: {
         etherscan: {
           apiUrl: 'https://explorer.hemi.xyz/api',
-          apiKey: 'noApiKeyNeeded',
         },
       },
     },
@@ -62,12 +63,12 @@ const config: HardhatUserConfig = {
     },
   },
 
-  sourcify: {
-    enabled: false,
+  namedAccounts: {
+    deployer: 0,
   },
 
-  namedAccounts: {
-    deployer: process.env.DEPLOYER || 0,
+  sourcify: {
+    enabled: false,
   },
 
   solidity: {
