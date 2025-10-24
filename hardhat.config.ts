@@ -22,13 +22,11 @@ const config: HardhatUserConfig = {
       url: mainnetNodeUrl,
       accounts,
       chainId: 1,
-      deploy: ['deploy/mainnet'],
     },
     optimism: {
       url: optimismNodeUrl,
       accounts,
       chainId: 10,
-      deploy: ['deploy/optimism'],
       verify: {
         etherscan: {
           apiUrl: 'https://explorer.optimism.io/api',
@@ -40,13 +38,11 @@ const config: HardhatUserConfig = {
       url: baseNodeUrl,
       accounts,
       chainId: 8453,
-      deploy: ['deploy/base'],
     },
     hemi: {
       url: hemiNodeUrl,
       accounts,
       chainId: 43111,
-      deploy: ['deploy/hemi'],
       verify: {
         etherscan: {
           apiUrl: 'https://explorer.hemi.xyz/api',
@@ -58,7 +54,6 @@ const config: HardhatUserConfig = {
       url: plasmaNodeUrl,
       accounts,
       chainId: 9745,
-      deploy: ['deploy/plasma'],
       verify: {
         etherscan: {
           apiUrl: 'https://api.routescan.io/v2/network/mainnet/evm/9745/etherscan',
@@ -74,8 +69,6 @@ const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: process.env.DEPLOYER || 0,
   },
-
-  paths: {sources: 'src'},
 
   solidity: {
     version: '0.8.29',
